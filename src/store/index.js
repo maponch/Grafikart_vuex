@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import account from './modules/account'
-import createPersistedState from "vuex-persistedstate"
+
 
 Vue.use(Vuex)
 
 console.log('index.js')
-
 const state = () => ({
   todos: [{
     name: 'Notre première tâche',
@@ -41,8 +39,11 @@ const actions = {
     store.commit('DELETE_TODO', todo)
   }
 }
-
+localStorage.setItem('fou', 'abcd')
+    
+const stock = localStorage.getItem('fou')
 const store = new Vuex.Store({
+  babar: stock,
 
   state: state,
 
@@ -51,11 +52,6 @@ const store = new Vuex.Store({
   mutations: mutations,
 
   actions: actions,
-  // store test
-  modules:{
-    account,
-    },
-  plugins: [createPersistedState()]
 })
 
 // global.store = store 

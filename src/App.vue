@@ -1,11 +1,5 @@
 <template>
   <div id="app">
-    <!-- store test -->
-    <div>
-      <div>{{ this.userId }}</div>
-      <button @click="login()">Login as Nick</button>
-      <button @click="logout()">Logout</button>
-    </div>
     <div>
           <todos></todos>
           <todos></todos>
@@ -21,7 +15,7 @@
 import Todos from './components/Todos'
 import Carousel from './components/carousel/Carousel'
 import CarouselSlide from './components/carousel/CarouselSlide'
-import { mapState } from 'vuex'
+
 
 export default {
   name: 'App',
@@ -40,10 +34,6 @@ export default {
       }]
     }
   },
-  // store test
-  computed: mapState({
-    userId: state => state.account.userId
-  }),
   methods: {
     addTodo() {
       this.todos.push({
@@ -61,13 +51,6 @@ export default {
       console.log('jesaispas')
       this.$store.dispatch('setTest', 'je ne sais pas')
     },
-    // store test
-    login() {
-      this.$store.commit('login', 'Nick')
-    },
-    logout() {
-      this.$store.commit('logout')
-    }
   },
   components: {
     Todos,

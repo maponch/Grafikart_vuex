@@ -20,7 +20,6 @@
             @keyup.esc="cancelEdit" v-focus="todo === editing">
         </li>
       </ul>
-
     </div>
     <footer class="footer" v-show="hasTodos">
       <span class="todo-count"><strong>{{ remainingTodosCount }}</strong> tâches à faire</span>
