@@ -6,11 +6,11 @@ Vue.use(Vuex)
 
 console.log('index.js')
 const state = () => ({
-  todos: [{
-    name: 'Notre première tâche',
-    completed: true
-  }],
-  test: 'text de test'
+  todos: JSON.parse(localStorage.getItem("todos")) || [],
+  test: '',
+  nbr: 0,
+  obj: {},
+  arr: []
 })
 const getters = {
   todos: state => state.todos,
@@ -20,15 +20,26 @@ const getters = {
   completedTodosCount: state => getters.completedTodos(state).length,
 }
 const mutations = {
-  ADD_TODO: (state, name) => {
-    if (name !== ''){state.todos.push({
+  ADD_TODO(state, name) {
+    // state.todos.push()
+    // JSON.stringify(this.todo)
+    // localStorage.setItem('todo', curieux)
+
+    const newTodos = [...state.todos, {
       name: name,
       completed: false
-    })}
+    }]
+    localStorage.setItem('todos', JSON.stringify(newTodos))
+    state.todos = newTodos
   },
-  DELETE_TODO: (state, todo) => {
-    state.todos.splice(i => i !== todo)
-    
+  DELETE_TODO(state, todo) {
+    const arr = [...state.todos]
+    const index = arr.indexOf(todo);
+    delete arr[index]
+    const newArr = arr.filter((e) => e)
+
+    localStorage.setItem('todos', JSON.stringify(newArr))
+    state.todos = newArr
   }
 }
 const actions = {
@@ -39,11 +50,7 @@ const actions = {
     store.commit('DELETE_TODO', todo)
   }
 }
-localStorage.setItem('fou', 'abcd')
-    
-const stock = localStorage.getItem('fou')
 const store = new Vuex.Store({
-  babar: stock,
 
   state: state,
 

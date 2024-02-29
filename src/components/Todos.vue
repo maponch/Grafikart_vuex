@@ -36,6 +36,7 @@
 
 <script>
 import Vuex from 'vuex'
+import Vue from 'vue'
 global.v = Vuex
 export default {
   props: {
@@ -47,8 +48,7 @@ export default {
       newTodo: '',
       filter: 'all',
       editing: null,
-      oldTodo: ''
-
+      oldTodo: '',
     }
   },
   watch: {
@@ -62,11 +62,12 @@ export default {
       deleteTodoStore: 'deleteTodo'
     }),
     addTodo() {
+      if (this.newTodo === '') return
       this.addTodoStore(this.newTodo)
       this.newTodo = ''
     },
-    deleteTodo(todo){
-      this.deletTodoStorage(todo)
+    deleteTodo(todo) {
+      this.deleteTodoStore(todo)
     },
     deleteCompleted() {
       this.todos = this.todos.filter(todo => !todo.completed)
@@ -126,7 +127,7 @@ export default {
   directives: {
     focus(el, value) {
       if (value) {
-        this.$nextTick(_ => {
+        Vue.nextTick(_ => {
           el.focus()
         })
       }
